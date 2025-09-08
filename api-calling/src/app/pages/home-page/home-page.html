@@ -1,0 +1,10 @@
+<h1>home-page works!</h1>
+<hr>
+<app-navbar></app-navbar>
+<div class="contents-trips">
+    @for (item of trips; track $index) {
+    <app-card-trip [idx]="item.idx" [name]="item.name" [country]="item.country" [coverimage]="item.coverimage"
+        [detail]="item.detail" [price]="item.price" [duration]="item.duration"
+        [destination_zone]="item.destination_zone"></app-card-trip>
+    }
+</div>

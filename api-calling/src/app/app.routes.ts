@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
-import { AsyncDemo } from './pages/async-demo/async-demo';
 import { CallApi } from './pages/call-api/call-api';
+import { HomePage } from './pages/home-page/home-page';
+import { Pagenotfound } from './pages/pagenotfound/pagenotfound';
 
 export const routes: Routes = [
-    {path: '', component: AsyncDemo},
-    {path: 'api', component: CallApi}
+    {path: '', component: HomePage},
+    {path: 'create/trips', component: CallApi},
+    {path: '**', component:Pagenotfound}
 ];

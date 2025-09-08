@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="card-header">
+        <img height="200px" src="{{coverimage}}" alt="image">
+    </div>
+    
+    <div class="card-content">
+        <b class="price-tag">฿{{price}}</b><br>
+        <label class="zone-badge">{{destination_zone}}</label>
+        <h3 class="card-title">{{name}}</h3>
+        
+        <label>{{country}}</label>
+        <label class="card-detail">{{getDescription()}}</label><hr>
+        <b>ระยะเวลา {{duration}} วัน</b>
+        
+        <div class="card-meta">
+            <div class="card-action">
+                <button (click)="useTrips()">จองทัวร์</button>
+            </div>
+        </div>
+    </div>
+</div>

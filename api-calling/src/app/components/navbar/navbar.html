@@ -1,0 +1,5 @@
+<div class="navbar">
+    @for (item of menu; track $index) {
+        <a class="item" href="{{item.path}}">{{ item.title }}</a>
+    }
+</div>

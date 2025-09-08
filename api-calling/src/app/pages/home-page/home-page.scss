@@ -1,0 +1,7 @@
+.contents-trips {
+    justify-content: center;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px, 10px));
+    gap: 16px;
+}
