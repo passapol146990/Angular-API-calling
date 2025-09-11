@@ -28,4 +28,21 @@ export class APIService {
     return this.http.get<ResponseGetTrips[]>(`${config.API_URL}/trips/search?q=${query}`);
   }
 
+  async getTripsD(id:number){
+    return this.http.get(`${config.API_URL}/trips/${id}`)
+  }
+
+  async createTrip(tripData: any) {
+    return this.http.post(`${config.API_URL}/trips`, tripData);
+  }
+
+  async deleteTrip(id : number){
+    return this.http.delete(`${config.API_URL}/trips/${id}`);
+  }
+
+  async editTrip(id:number,data:any){
+    // name, country, destinationid, coverimage, detail, price, duration
+    return this.http.put(`${config.API_URL}/trips/${id}`,data);
+  }
+
 }

@@ -1,4 +1,8 @@
 import { Component, input, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { APIService } from '../../services/apiservice';
+import { lastValueFrom, timeout } from 'rxjs';
 
 @Component({
   selector: 'app-card-trip',
@@ -16,14 +20,43 @@ export class CardTrip {
   @Input() duration!: string;
   @Input() destination_zone!: string;
 
-  getDescription() {
-    if (typeof this.detail === 'string' && this.detail.length > 20) {
-      return this.detail.slice(0, 40) + '...';
+
+  constructor(private route: Router,private APIService:APIService) { }
+
+  sliceText(text:string,len:number){
+    if (text.length > len) {
+      return text.slice(0, len) + '...';
     }
-    return this.detail;
+    return text;
   }
 
-  useTrips(){
-    console.log(this.idx);
+  async useTrips() {
+    this.route.navigateByUrl(`get/trip/${this.idx}`);
+  }
+
+  async deleteTrip() {
+    Swal.fire({
+      title: "คุณต้องการลบ?",
+      text: `คุณต้องการลบ "${this.name}" ใช่หรือไม่`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "rgba(45, 67, 227, 1)",
+      confirmButtonText: "ใช่ ลบเลย"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+        const response = await this.APIService.deleteTrip(this.idx);
+        const res = await lastValueFrom(response);
+        console.log(res);
+        setTimeout(()=>{
+          window.location.reload();
+        },1500)
+      }
+    });
   }
 }

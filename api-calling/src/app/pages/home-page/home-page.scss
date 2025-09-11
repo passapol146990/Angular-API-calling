@@ -5,3 +5,45 @@
     grid-template-columns: repeat(auto-fit,minmax(300px, 10px));
     gap: 16px;
 }
+.search-box {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background-color: #d3d2d2;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px 10px;
+
+  .search-input,
+  .search-select {
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: all 0.3s ease;
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+    }
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+
+  .search-input {
+    background-color: #ffffff;
+  }
+
+  .search-select {
+    background-color: #ffffff;
+    cursor: pointer;
+    
+    option {
+      padding: 12px;
+      font-size: 16px;
+    }
+  }
+}

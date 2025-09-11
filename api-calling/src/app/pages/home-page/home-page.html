@@ -1,10 +1,29 @@
-<h1>home-page works!</h1>
-<hr>
 <app-navbar></app-navbar>
-<div class="contents-trips">
-    @for (item of trips; track $index) {
-    <app-card-trip [idx]="item.idx" [name]="item.name" [country]="item.country" [coverimage]="item.coverimage"
-        [detail]="item.detail" [price]="item.price" [duration]="item.duration"
-        [destination_zone]="item.destination_zone"></app-card-trip>
+
+<div class="search-box">
+  <input type="text" placeholder="ค้นหาด้วย ID" [(ngModel)]="searchId" (input)="filterTrips()" class="search-input">
+  <input type="text" placeholder="ค้นหาด้วยชื่อ" [(ngModel)]="searchName" (input)="filterTrips()" class="search-input">
+  
+  <select [(ngModel)]="searchCountry" (change)="filterTrips()" class="search-select">
+    <option value="">-- เลือกประเทศ --</option>
+    @for (e of countries; track $index) {
+        <option [value]="e">{{ e }}</option>
     }
+  </select>
+</div>
+
+
+<div class="contents-trips">
+  @for (item of filteredTrips; track item.idx) {
+    <app-card-trip 
+      [idx]="item.idx" 
+      [name]="item.name" 
+      [country]="item.country"
+      [coverimage]="item.coverimage" 
+      [detail]="item.detail" 
+      [price]="item.price"
+      duration="{{item.duration}}"
+      [destination_zone]="item.destination_zone">
+    </app-card-trip>
+  }
 </div>

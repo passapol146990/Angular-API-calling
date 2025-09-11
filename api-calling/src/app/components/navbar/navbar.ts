@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class Navbar {
   menu: any[] = [
     {path:"",title:"Home"},
-    {path:"/create/trips",title:"add trips"}
+    {path:"/add/trips",title:"create trips"}
   ];
   constructor(){}
 }

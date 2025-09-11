@@ -6,15 +6,18 @@
     <div class="card-content">
         <b class="price-tag">฿{{price}}</b><br>
         <label class="zone-badge">{{destination_zone}}</label>
-        <h3 class="card-title">{{name}}</h3>
+        <h4 class="card-title">{{sliceText(name,20)}}</h4>
         
         <label>{{country}}</label>
-        <label class="card-detail">{{getDescription()}}</label><hr>
+        <label class="card-detail">{{sliceText(detail,40)}}</label><hr>
         <b>ระยะเวลา {{duration}} วัน</b>
         
         <div class="card-meta">
             <div class="card-action">
-                <button (click)="useTrips()">จองทัวร์</button>
+                <button class="btn-detail" (click)="useTrips()">รายละเอียด</button>
+            </div>
+            <div class="card-action">
+                <button class="btn-delete" (click)="deleteTrip()">ลบ</button>
             </div>
         </div>
     </div>

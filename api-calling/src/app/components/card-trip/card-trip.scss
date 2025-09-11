@@ -14,18 +14,25 @@
     }
     .card-content{
         .card-meta{
+            display: flex;
+            justify-content: space-between;
             .card-action{
                 button{
                     padding: 5px 30px;
                     border-radius: 5px;
                     font-size: 20px;
-                    background: #4169e1;
                     border: none;
                     color: aliceblue;
                     &:hover{
                         cursor: pointer;
                         transform: scale(1.01);
                     }
+                }
+                .btn-detail{
+                    background: #4169e1;
+                }
+                .btn-delete{
+                    background: #d33;
                 }
             }
         }
