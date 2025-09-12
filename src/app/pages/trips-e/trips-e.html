@@ -1,0 +1,134 @@
+<app-navbar></app-navbar>
+
+<div class="container dark-theme" *ngIf="!loading; else loadingTemplate">
+  <div class="edit-trip-form">
+    <div class="form-header">
+      <h2><i class="fas fa-edit"></i> แก้ไขข้อมูลสถานที่</h2>
+      <p>อัปเดตข้อมูลสถานที่ท่องเที่ยวของคุณให้สมบูรณ์</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="trip-form">
+      <!-- ชื่อสถานที่ -->
+      <div class="form-group">
+        <label for="name">
+          <i class="fas fa-map-marker-alt"></i> ชื่อสถานที่:
+        </label>
+        <div class="input-container">
+          <input type="text" id="name" [(ngModel)]="locationData.name" name="name" class="form-control" required placeholder="กรอกชื่อสถานที่">
+          <span class="input-underline"></span>
+        </div>
+      </div>
+
+      <!-- รายละเอียด -->
+      <div class="form-group">
+        <label for="detail">
+          <i class="fas fa-file-alt"></i> รายละเอียด:
+        </label>
+        <div class="input-container">
+          <textarea id="detail" [(ngModel)]="locationData.detail" name="detail" class="form-control" required placeholder="กรอกรายละเอียดสถานที่"></textarea>
+          <span class="input-underline"></span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <!-- ราคา -->
+        <div class="form-group">
+          <label for="price">
+            <i class="fas fa-tag"></i> ราคา (บาท):
+          </label>
+          <div class="input-container">
+            <input type="number" id="price" [(ngModel)]="locationData.price" name="price" class="form-control" required placeholder="0">
+            <span class="input-underline"></span>
+            <span class="currency">THB</span>
+          </div>
+        </div>
+
+        <!-- ระยะเวลา -->
+        <div class="form-group">
+          <label for="duration">
+            <i class="fas fa-calendar-day"></i> ระยะเวลา (วัน):
+          </label>
+          <div class="input-container">
+            <input type="number" id="duration" [(ngModel)]="locationData.duration" name="duration" class="form-control" placeholder="0">
+            <span class="input-underline"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <!-- ประเทศ -->
+        <div class="form-group">
+          <label for="country">
+            <i class="fas fa-globe-asia"></i> ประเทศ:
+          </label>
+          <div class="select-container">
+            <select id="country" [(ngModel)]="locationData.country" name="country" class="form-control" required>
+              <option value="">เลือกประเทศ</option>
+              <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+            </select>
+            <div class="select-arrow">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- ทวีป -->
+        <div class="form-group">
+          <label for="continent">
+            <i class="fas fa-earth-americas"></i> ทวีป:
+          </label>
+          <div class="select-container">
+            <select id="continent" [(ngModel)]="locationData.continent" name="continent" class="form-control" required>
+              <option value="">เลือกทวีป</option>
+              <option *ngFor="let continent of continents" [value]="continent">{{ continent }}</option>
+            </select>
+            <div class="select-arrow">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- URL รูปภาพ -->
+      <div class="form-group">
+        <label for="coverimage">
+          <i class="fas fa-image"></i> URL รูปภาพ:
+        </label>
+        <div class="input-container">
+          <input type="text" id="coverimage" [(ngModel)]="locationData.coverimage" name="coverimage" class="form-control" placeholder="https://example.com/image.jpg">
+          <span class="input-underline"></span>
+        </div>
+        
+        <div class="image-preview" *ngIf="locationData.coverimage">
+          <p>ภาพตัวอย่าง:</p>
+          <div class="preview-container">
+            <img [src]="locationData.coverimage" alt="รูปสถานที่" class="preview-image">
+            <div class="preview-overlay" (click)="locationData.coverimage = ''">
+              <i class="fas fa-times"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a href="/" type="button" class="btn btn-secondary" routerLink="/previous-page">
+          <i class="fas fa-arrow-left"></i> ย้อนกลับ
+        </a>
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-save"></i> บันทึกข้อมูล
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="loading">
+    <div class="moon-loader">
+      <div class="crater"></div>
+      <div class="crater"></div>
+      <div class="crater"></div>
+    </div>
+    <p>กำลังโหลดข้อมูล...</p>
+  </div>
+</ng-template>

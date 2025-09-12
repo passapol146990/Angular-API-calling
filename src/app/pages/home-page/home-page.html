@@ -1,0 +1,87 @@
+<app-navbar></app-navbar>
+
+<div class="home-container">
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>ค้นหาการเดินทางในฝันของคุณ</h1>
+      <p>พบกับประสบการณ์การท่องเที่ยวที่ unforgettable มากกว่า 100+ การเดินทางรอบโลก</p>
+    </div>
+  </div>
+
+  <div class="search-section">
+    <div class="search-header">
+      <h2>ค้นหาการเดินทาง</h2>
+      <p>ใช้เครื่องมือค้นหาด้านล่างเพื่อหาการเดินทางที่เหมาะกับคุณ</p>
+    </div>
+    
+    <div class="search-box">
+      <div class="search-input-group">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" placeholder="ค้นหาด้วย ID" [(ngModel)]="searchId" (input)="filterTrips()" class="search-input">
+      </div>
+      
+      <div class="search-input-group">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <input type="text" placeholder="ค้นหาด้วยชื่อ" [(ngModel)]="searchName" (input)="filterTrips()" class="search-input">
+      </div>
+      
+      <div class="search-input-group">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <select [(ngModel)]="searchCountry" (change)="filterTrips()" class="search-select">
+          <option value="">-- เลือกประเทศ --</option>
+          @for (e of countries; track $index) {
+              <option [value]="e">{{ e }}</option>
+          }
+        </select>
+      </div>
+      
+      <button class="search-btn" (click)="filterTrips()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        ค้นหา
+      </button>
+    </div>
+    
+    <div class="results-info" *ngIf="filteredTrips.length > 0">
+      <p>พบการเดินทาง <span class="highlight">{{filteredTrips.length}}</span> รายการ</p>
+    </div>
+  </div>
+
+  <div class="contents-trips">
+    @if (filteredTrips.length > 0) {
+      @for (item of filteredTrips; track item.idx) {
+        <app-card-trip 
+          [idx]="item.idx" 
+          [name]="item.name" 
+          [country]="item.country"
+          [coverimage]="item.coverimage" 
+          [detail]="item.detail" 
+          [price]="item.price"
+          duration="{{item.duration}}"
+          [destination_zone]="item.destination_zone">
+        </app-card-trip>
+      }
+    } @else {
+      <div class="no-results">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <h3>ไม่พบการเดินทางที่ค้นหา</h3>
+        <p>ลองเปลี่ยนคำค้นหาหรือตัวกรองอื่นๆดูนะครับ</p>
+      </div>
+    }
+  </div>
+</div>

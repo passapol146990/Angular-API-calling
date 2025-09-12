@@ -1,0 +1,321 @@
+// ตัวแปรสี
+$dark-bg: #121212;
+$dark-secondary: #1e1e1e;
+$dark-tertiary: #2d2d2d;
+$accent-color: #64ffda;
+$text-primary: #f5f5f5;
+$text-secondary: #a0a0a0;
+$transition: all 0.3s ease;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin mobile {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+.trip-detail-container {
+  background-color: $dark-bg;
+  min-height: 100vh;
+  color: $text-primary;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.loading {
+  @include flex-center;
+  flex-direction: column;
+  padding: 4rem;
+  min-height: 50vh;
+  
+  p {
+    margin-top: 1rem;
+    color: $text-secondary;
+  }
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba($accent-color, 0.3);
+  border-radius: 50%;
+  border-top-color: $accent-color;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.cover-image-container {
+  position: relative;
+  height: 450px;
+  overflow: hidden;
+  
+  @include mobile {
+    height: 350px;
+  }
+  
+  .cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+  }
+  
+  .image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    
+    @include mobile {
+      padding: 1.5rem;
+    }
+    
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: $text-secondary;
+      
+      a {
+        color: $accent-color;
+        text-decoration: none;
+        transition: $transition;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      
+      .separator {
+        margin: 0 0.5rem;
+      }
+    }
+    
+    .trip-title {
+      font-size: 2.5rem;
+      margin: 0 0 1rem 0;
+      font-weight: 700;
+      
+      @include mobile {
+        font-size: 2rem;
+      }
+    }
+    
+    .trip-meta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .trip-badge,
+    .duration-badge,
+    .price-badge {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .trip-badge {
+      background: rgba($accent-color, 0.2);
+      color: $accent-color;
+    }
+    
+    .duration-badge {
+      background: rgba(100, 181, 246, 0.2);
+      color: #64b5f6;
+    }
+    
+    .price-badge {
+      background: rgba(76, 175, 80, 0.2);
+      color: #4caf50;
+    }
+  }
+}
+
+.trip-main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  
+  @include mobile {
+    padding: 1.5rem;
+  }
+}
+
+.trip-info-section {
+  background: $dark-secondary;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  
+  @include mobile {
+    padding: 1.5rem;
+  }
+  
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    .info-icon {
+      @include flex-center;
+      width: 50px;
+      height: 50px;
+      background: rgba($accent-color, 0.1);
+      border-radius: 10px;
+      flex-shrink: 0;
+      
+      svg {
+        width: 24px;
+        height: 24px;
+        color: $accent-color;
+      }
+    }
+    
+    .info-content {
+      h3 {
+        margin: 0 0 0.25rem 0;
+        font-size: 0.9rem;
+        color: $text-secondary;
+        font-weight: 500;
+      }
+      
+      p {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        
+        &.price {
+          color: $accent-color;
+        }
+      }
+    }
+  }
+}
+
+.details-section,
+.gallery-section {
+  margin-bottom: 3rem;
+  
+  .section-header {
+    margin-bottom: 1.5rem;
+    
+    h2 {
+      font-size: 1.8rem;
+      margin: 0 0 0.5rem 0;
+      color: $accent-color;
+    }
+    
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, $accent-color, transparent);
+      width: 100px;
+    }
+  }
+  
+  .detail-content {
+    line-height: 1.7;
+    
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  
+  .gallery-item {
+    aspect-ratio: 4/3;
+    background: $dark-tertiary;
+    border-radius: 8px;
+    overflow: hidden;
+    @include flex-center;
+    
+    .gallery-placeholder {
+      text-align: center;
+      color: $text-secondary;
+      
+      svg {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 0.5rem;
+      }
+      
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  
+  @include mobile {
+    flex-direction: column;
+  }
+  
+  button {
+    @include flex-center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: $transition;
+    
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    &.btn-primary {
+      background: $accent-color;
+      color: $dark-bg;
+      
+      &:hover {
+        background: lighten($accent-color, 10%);
+        transform: translateY(-2px);
+      }
+    }
+    
+    &.btn-secondary {
+      background: transparent;
+      color: $accent-color;
+      border: 1px solid $accent-color;
+      
+      &:hover {
+        background: rgba($accent-color, 0.1);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
